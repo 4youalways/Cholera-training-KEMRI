@@ -2,30 +2,25 @@ nextflow.enable.dsl=2
 
 //params.input = "/home/sequser/Cholera-training-KEMRI/data/fastq/*_L001_R{1,2}_001.fastq.gz"
 params.input = "/Users/zuza/repos/Cholera-training-KEMRI/data/fastq/*_{1,2}.fastq.gz" // in Zuzas laptop
-params.outdir = "../results"
 
-process FASTQC {
-    container 'staphb/fastqc:0.12.1'
-    publishDir "${params.outdir}", mode: 'copy'
 
-    input:
-    tuple val(sample_id), path('reads')
-    
-    output:
-    file "fastqc_output/"
-    
-    script:
-    """
-    mkdir fastqc_output
-    fastqc -o fastqc_output ${reads}
-    """
-}
 
+
+include { FASTQC as before_trim } from './modules/fastqc.nf' 
+include { FASTQC as after_trim }  from './modules/fastqc.nf'
+include { TRIMMOMATIC } from './modules/trimming_and_filtering.nf'
+include { SNIPPY } from './modules/variant_calling.nf'
+include { SNIPPY_CORE  } from './modules/variant_calling.nf'
 
 
 
 workflow  {
-    reads_ch = channel.fromFilePairs(params.input, checkIfExists:true).view()
-    FASTQC(reads_ch)
-
+    reads_ch = channel.fromFilePairs(params.input, checkIfExists:true)
+    ref_ch = channel.fromPath(params.ref, checkIfExists:true)
+    before_trim(reads_ch)
+    trimmed = TRIMMOMATIC(reads_ch)
+    after_trim(trimmed)
+    snps = SNIPPY(trimmed, ref_ch)
+//    SNIPPY_CORE(snps, ref_ch)
+    
 }
