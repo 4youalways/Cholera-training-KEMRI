@@ -1,0 +1,45 @@
+LOCUS       NC_016445            4078740 bp    DNA     circular CON 03-DEC-2023
+DEFINITION  Vibrio cholerae O1 str. 2010EL-1786 chromosome 1, complete sequence.
+ACCESSION   NC_016445
+VERSION     NC_016445.1
+DBLINK      BioProject: PRJNA224116
+            BioSample: SAMN00765529
+            Assembly: GCF_000166455.1
+KEYWORDS    .
+SOURCE      Vibrio cholerae O1 str. 2010EL-1786
+  ORGANISM  Vibrio cholerae O1 str. 2010EL-1786
+            Bacteria; Pseudomonadota; Gammaproteobacteria; Vibrionales;
+            Vibrionaceae; Vibrio.
+FEATURES             Location/Qualifiers
+     source          1..3031375
+                     /organism="Vibrio cholerae O1 str. 2010EL-1786"
+                     /mol_type="genomic DNA"
+                     /strain="2010EL-1786"
+                     /host="Homo sapiens"
+                     /culture_collection="ATCC:BAA-2163"
+                     /db_xref="taxon:914149"
+                     /chromosome="1"
+                     /country="Haiti"
+                     /collection_date="2010"
+                     /collected_by="Ministere de la Sante Publique et de la
+                     Population, Haiti"
+                     /serogroup="O1"
+                     /note="Isolate from Haiti 2010 cholera outbreak"
+     misc_feature    3031376..3051375
+                     /note="spacer_1"
+     source          3032376..4078740
+                     /organism="Vibrio cholerae O1 str. 2010EL-1786"
+                     /mol_type="genomic DNA"
+                     /strain="2010EL-1786"
+                     /host="Homo sapiens"
+                     /culture_collection="ATCC:BAA-2163"
+                     /db_xref="taxon:914149"
+                     /chromosome="2"
+                     /country="Haiti"
+                     /collection_date="2010"
+                     /collected_by="Ministere de la Sante Publique et de la
+                     Population, Haiti"
+                     /serogroup="O1"
+                     /note="Isolate from Haiti 2010 cholera outbreak"
+ORIGIN
+//
