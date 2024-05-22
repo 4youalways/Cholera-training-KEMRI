@@ -12,6 +12,7 @@ include { TRIMMOMATIC } from './modules/trimming_and_filtering.nf'
 include { SNIPPY } from './modules/variant_calling.nf'
 include { SNIPPY_CORE  } from './modules/variant_calling.nf'
 include { SNP_SITES } from './modules/variant_calling.nf'
+include { IQTREE } from './modules/iqtree.nf'
 
 
 
@@ -23,5 +24,8 @@ workflow  {
     after_trim(trimmed)
     snps = SNIPPY(trimmed, ref_ch).collect() // variant calling step
     full_aln = SNIPPY_CORE(snps, ref_ch) // generating fasta alignment
-    SNP_SITES(full_aln)
+    phylo = SNP_SITES(full_aln)
+   
+    IQTREE(SNP_SITES.out.phylo, SNP_SITES.out.constant)
+
 }

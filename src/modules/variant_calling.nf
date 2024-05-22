@@ -50,8 +50,8 @@ process SNP_SITES{
     path full_aln
     
     output:
-    path "phylo.aln"
-    path "constant.txt"
+    path "phylo.aln", emit: phylo
+    path "constant.txt", emit: constant
  
     script :
     """
