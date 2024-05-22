@@ -9,11 +9,12 @@ process SNIPPY{
 
 
     output:
-    path "${sample_id}"
- 
+    //tuple val(sample_id), path("${sample_id}")
+    path("${sample_id}")
+
     script :
     """
-    snippy --cpus ${task.cpus} --outdir ${sample_id} --reference ${ref} --R1 ${reads[0]} --R2 ${reads[0]} --force
+    snippy --cpus ${task.cpus} --outdir ${sample_id} --reference ${ref} --R1 ${reads[0]} --R2 ${reads[0]} --prefix ${sample_id}
     
     """
 }
@@ -24,16 +25,37 @@ process SNIPPY_CORE{
     cpus 8
     
     input:
-    tuple val(sample_id), path(reads)
-    each path('ref')
-
+    //tuple val(sample_id), path(snps)
+    path(snps)
+    path(ref)
 
     output:
-    path "${sample_id}"
+    path "core.*"
+ 
+    script :
+
+    //mkdir samples
+    //cp -r ${snps} samples/
+    """
+    snippy-core --ref ${ref} --prefix core ${snps}*
+    """
+}
+
+process SNP_SITES{
+    tag "calling snps for ${sample_id}"
+    container 'staphb/snippy:4.6.0-SC2'
+    cpus 8
+    
+    input:
+    path full_aln
+    
+    output:
+    path "phylo.aln"
+    path "constant.txt"
  
     script :
     """
-    snippy --cpus ${task.cpus} --outdir ${sample_id} --reference ${ref} --R1 ${reads[0]} --R2 ${reads[0]} --force
-    
+    snp-sites -b -c -o phylo.aln ${full_aln}/core.full.aln
+    snp-sites -C ${full_aln}/core.full.aln > constant.txt
     """
 }
