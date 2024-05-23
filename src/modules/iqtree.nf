@@ -3,7 +3,7 @@ process IQTREE {
 
     tag "$sample_id"
     container 'staphb/iqtree2:2.2.2.7'
-    debug true
+    
     input:
     path phylo
     path constant

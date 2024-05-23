@@ -15,7 +15,7 @@ include { IQTREE } from './modules/iqtree.nf'
 
 
 workflow  {
-    reads_ch = channel.fromPath(params.sample_sheet)
+    reads_ch = channel.fromPath(params.sample_sheet, checkIfExists:true)
     .splitCsv(header: true)
     .map {
         row ->
@@ -25,7 +25,6 @@ workflow  {
             file(row.read_2)
         ]]
     }
-    .view()
 
     ref_ch = channel.fromPath(params.ref, checkIfExists:true)
     before_trim(reads_ch)
