@@ -3,6 +3,7 @@ process FASTQC {
 
     tag "$sample_id"
     container 'staphb/fastqc:0.12.1'
+    //container 'phylogenetics:0.0.6'
 
     input:
     tuple val(sample_id), path(reads)
@@ -14,7 +15,6 @@ process FASTQC {
 
     script:
     """
-    #!/bin/bash
-    fastqc --threads $task.cpus -o . ${reads}
+    fastqc --threads $task.cpus ${reads}
     """
 }
