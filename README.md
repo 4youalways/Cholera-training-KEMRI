@@ -12,7 +12,7 @@ the repository uses git-lfs to download test data in the fastq format. before yo
 to clone the repo, make sure you have [git](https://git-scm.com/) and [git-lfs](https://git-lfs.com/) set up in your system
 
 ```
-git clone git@github.com:4youalways/Cholera-training-KEMRI.git
+git clone git@github.com:4youalways/PhyloGenix.git 
 
 ```
 
