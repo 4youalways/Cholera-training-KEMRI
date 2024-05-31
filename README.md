@@ -1,4 +1,4 @@
-# Cholera-training-KEMRI
+# PhyloGenix
 A repository for developing workflows to work with bacteria samples. the focus is phylogenetic analysis. the end result of the pipeline is a *newick* formatted tree
 
 the script processes are viewed in the following dag
